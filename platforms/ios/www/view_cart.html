@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/lightbox.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
+	<link href="css/responsive.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+	    <script src="js/html5shiv.js"></script>
+	    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+
+<body>
+   <script type="text/javascript" src="cordova.js"></script>
+   <script type="text/javascript" src="js/index.js"></script>
+   <script type="text/javascript">
+       app.initialize();
+   </script>
+   <style>
+   .container {
+     margin-top: -20px;
+   }
+   </style>
+	<header id="header">
+        <div class="navbar navbar-inverse" role="banner">
+            <div class="container">
+                <div class="navbar-header" style="vertical-align: top;">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a href="view_cart.html" style="margin-top: 15px;" class="btn btn-sm btn-default">
+                       <i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;&nbsp;
+                       <span id="cartTotal">$0.00 (0 items)</span>
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li class="active"><a href="view_cart.html">View Cart</a></li>
+                        <li><a href="login.html">Login/Logout</a></li>
+                        <li><a href="previous_order.html">Previous Orders</a></li>
+                        <li><a href="user_info.html">Settings</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--/#header-->
+    <script type="application/x-javascript">
+    var page = "view_cart";
+    </script>
+    <script type="text/javascript" src="js/constants.js"></script>
+    <script src="js/menu.js"> </script>
+    <style>
+    </style>
+    <section id="services">
+        <div class="container" style="margin-top: -70px;">
+            <h2 class="page-header">Cart</h2>
+            <form id="cartForm" action="#" method="POST">
+              <!-- <div class="view-cart-item-table">
+                <div class="view-cart-item-table-row">
+                  <div class="view-cart-item-table-cell-top-left"><p class="view-cart-item-header">Whatta-Burger with Cheese</p>
+                     <p>Here are a list of the condiments associated with the item, if any</p>
+                  </div>
+                  <div class="view-cart-item-table-cell-top-right view-cart-strong">$<span id="item-price">4.25</span></div>
+                </div>
+                <div class="view-cart-item-table-row">
+                  <div class="view-cart-item-table-cell-bottom-left">
+                     <button type="button" onclick="incrementCart('1'); return false;" name="btnUpdateCart" class="btn btn-primary">&nbsp;<i class="fa fa-plus"></i>&nbsp;</button>&nbsp;&nbsp;
+                     <button type="button" onclick="decrementCart('1'); return false;" name="btnUpdateCart" class="btn btn-danger">&nbsp;<i class="fa fa-minus"></i>&nbsp;</button>&nbsp;&nbsp;&nbsp;
+                     Quantity&nbsp;&nbsp;<span class="view-cart-strong" id="itemid_1_quantity">2<span>
+                  </div>
+                  <div class="view-cart-item-table-cell-bottom-right">
+                     <button type="button" onclick="removeItemFromCart('1'); return false;" name="btnRemoveCart" class="btn btn-danger">&nbsp;<i class="fa fa-trash"></i>&nbsp;</button>
+                  </div>
+                </div>
+             </div> -->
+           </form>
+           <br>
+           <div>
+                 <div style="display: table; width: 100%;">
+                    <div style="display: table-row;">
+                       <div style="display: table-cell; width: 50%;">
+                            <div class="view-cart-spacer">&nbsp;</div>
+                            <div class="view-cart-total">Sub-Total:&nbsp;&nbsp;$<span id="cart-subTotal">0.00</span></div>
+                            <div class="view-cart-spacer">&nbsp;</div>
+                            <div class="view-cart-total"><span id="cart-promo-discount-text">Discount</span>:&nbsp;&nbsp;$<span id="cart-discount">0.00</span></div>
+                            <div class="view-cart-spacer">&nbsp;</div>
+                            <div class="view-cart-total">Tax:&nbsp;&nbsp;$<span id="cart-tax">0.00</span></div>
+                            <div class="view-cart-spacer">&nbsp;</div>
+                            <div class="view-cart-total">Total:&nbsp;&nbsp;$<span id="cart-total">0.00</span></div>
+                            <br>
+                            <div class="checkbox-grid">
+                               <a href="" class="promo-code-btn btn btn-primary" onclick='$("#addPromoCodeModal").modal("show"); return false;'>Add Promo Code</a>
+                               <a href="" class="promo-code-btn btn btn-primary" onclick="removePromoCode(); return false;">Remove Promo Code</a>
+                            </div>
+                            <div class="view-cart-total"><a href="checkout.html" style="display: block" class="btn btn btn-success">Checkout</a></div>
+                            <div class="view-cart-spacer">&nbsp;</div>
+                       </div>
+                    </div>
+                 </div>
+           </div>
+        </div>
+        <p></p>
+        <div id="myModal" class="modal fade">
+           <div class="modal-dialog">
+             <div class="modal-content">
+               <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                 <h4 class="modal-title">Update Cart</h4>
+               </div>
+               <div class="modal-body">
+                 <p>You are about to delete the item from the cart. Click "Delete Item" to continue.</p>
+                 <input type="hidden" id="modalItemId" value="">
+               </div>
+               <div class="modal-footer">
+                 <button type="button" class="btn btn-primary" data-dismiss="modal">Keep Item</button>
+                 <button type="button" class="btn btn-danger" onclick="removeItemFromCart()" >Delete Item</button>
+               </div>
+             </div><!-- /.modal-content -->
+           </div><!-- /.modal-dialog -->
+         </div><!-- /.modal -->
+         <div id="promoModal" class="modal fade">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title">Update Cart</h4>
+                </div>
+                <div class="modal-body">
+                  <p>Promotional Code discount has been applied.</p>
+                  <input type="hidden" id="modalItemId" value="">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
+          <div id="addPromoCodeModal" class="modal fade">
+             <div class="modal-dialog">
+               <div class="modal-content">
+                 <div class="modal-header">
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                   <h4 class="modal-title">Update Cart</h4>
+                 </div>
+                 <div class="modal-body">
+                   <p>Promotional Code/Coupon:</p>
+                   <input type="text" id="txtPromo" value=""><br>
+                 </div>
+                 <div class="modal-footer">
+                   <button type="button" class="btn btn-primary" onclick="addPromoCode();" data-dismiss="modal">Add</button>
+                   <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                 </div>
+               </div><!-- /.modal-content -->
+             </div><!-- /.modal-dialog -->
+           </div><!-- /.modal -->
+         <div id="errorModal" class="modal fade">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title">Cart Error</h4>
+                </div>
+                <div class="modal-body">
+                  <p id="errorMessage"></p>
+                  <input type="hidden" id="modalItemId" value="">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
+    </section>
+    <!--/#footer-->
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/persist-min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/lightbox.min.js"></script>
+    <script type="text/javascript" src="js/wow.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/cart.js"></script>
+</body>
+</html>

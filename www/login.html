@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="">
+   <meta name="author" content="">
+   <title>Login</title>
+   <link href="css/bootstrap.min.css" rel="stylesheet">
+   <link href="css/font-awesome.min.css" rel="stylesheet">
+   <link href="css/animate.min.css" rel="stylesheet">
+   <link href="css/lightbox.css" rel="stylesheet">
+   <link href="css/main.css" rel="stylesheet">
+   <link href="css/responsive.css" rel="stylesheet">
+
+   <!--[if lt IE 9]>
+   <script src="js/html5shiv.js"></script>
+   <script src="js/respond.min.js"></script>
+   <![endif]-->
+   <link rel="shortcut icon" href="images/ico/favicon.ico">
+   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+   <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+   <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+
+<body>
+   <script type="text/javascript" src="cordova.js"></script>
+   <script type="text/javascript" src="js/index.js"></script>
+   <script type="text/javascript">
+   app.initialize();
+   </script>
+   <style>
+   .container {
+      margin-top: -20px;
+   }
+   </style>
+   <header id="header">
+      <div class="navbar navbar-inverse" role="banner">
+         <div class="container">
+            <div class="navbar-header" style="vertical-align: top;">
+               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+               </button>
+
+               <a href="view_cart.html" style="margin-top: 15px;" class="btn btn-sm btn-default">
+                  <i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;&nbsp;
+                  <span id="cartTotal">$0.00 (x Items)</span>
+               </a>
+            </div>
+            <div class="collapse navbar-collapse">
+               <ul class="nav navbar-nav navbar-right">
+                  <li><a href="home.html">Home</a></li>
+                  <li><a href="menu.html">Menu</a></li>
+                  <li><a href="view_cart.html">View Cart</a></li>
+                  <li class="active"><a href="login.html">Login/Logout</a></li>
+                  <li><a href="previous_order.html">Previous Orders</a></li>
+                  <li><a href="user_info.html">Settings</a></li>
+               </ul>
+            </div>
+         </div>
+      </div>
+   </header>
+   <!--/#header-->
+   <script type="application/x-javascript">
+   var page = "login";
+
+   function showRegistrationView() {
+      $("#registrationForm").show();
+      $("#loginForm").hide();
+   }
+
+   function showLoginView() {
+      $("#registrationForm").hide();
+      $("#loginForm").show();
+   }
+
+   function login() {
+      var email = $("#txtLoginEmail").val();
+      var password = $("#txtLoginPassword").val();
+
+      if (email === "") {
+         displayModal("Registration Error", "Email Address can not be empty. Please fill out the Email Address text");
+         return;
+      }
+
+      if (password === "") {
+         displayModal("Registration Error", "Password can not be empty. Please fill out the Password text");
+         return;
+      }
+
+     var request = {
+       "username": email,
+       "password": password
+ 		}
+
+      $.ajax({
+         type: 'POST',
+         contentType: 'application/json',
+         url: LOGIN_URL,
+         dataType: "json",
+         data: JSON.stringify(request),
+         success: function(data, textStatus, jqXHR){
+            //var r = JSON.parse(jqXHR);
+            //alert(data);
+            //return;
+            var x = JSON.parse(data);
+            //("response error: " + x.response.error);
+            if (x.response.error === "INVALID LOGIN") {
+               displayModal("Login Error", "Invalid Login. Please try again.");
+               return;
+            }
+            var u = x.response.user;
+            window.sessionStorage.setItem("user", JSON.stringify(u));
+
+            if($("#chkRemember").is(':checked')) {
+               window.localStorage.setItem("user", JSON.stringify(u));
+            }
+            window.location.href = "home.html";
+         },
+         error: function(jqXHR, textStatus, errorThrown){
+            //alert('addWine error: ' + textStatus +' ' + errorThrown + ' ' + JSON.stringify(jqXHR));
+            alert('error: ' + textStatus);
+            alert('error: ' + errorThrown);
+            alert('error:\n' + JSON.stringify(jqXHR));
+         },
+         complete: function() {
+            //alert("complete")
+         }
+     });
+     e.preventDefault();
+   }
+
+   function logout() {
+      window.sessionStorage.setItem("user", null);
+      window.localStorage.setItem("user", null);
+      displayModal("Logout", "You have been loged out.");
+      $("#btnLogout").hide();
+      $("#btn-reset-password").show();
+      $("#btnLogin-Register").hide();
+      $("#btnLogin").show();
+      $("#topDiv").show();
+      $("#btnLogin-Register").show();
+   }
+
+   function displayModal(title, body) {
+      $("#modal-title").text(title);
+      $("#modal-body").text(body);
+      $("#modal").modal('show')
+   }
+
+   function showResetPasswordModal() {
+      $("#pw-reset-modal").modal('show');
+   }
+
+   function resetPassword() {
+      var request = {
+          "email": $("#pw-reset-email").val()
+      }
+
+      $.ajax({
+          type: 'POST',
+          contentType: 'application/json',
+          url: RESET_PASSWORD_URL,
+          dataType: "json",
+          data: JSON.stringify(request),
+          success: function(data, textStatus, jqXHR){
+             $("#pw-reset-modal").modal('hide');
+             //alert(JSON.stringify(data));
+             var r = data;
+             if (r.response.error != "" && r.response.error != undefined) {
+                displayModal("Password Reset", "The email address [" + $("#pw-reset-email").val() +
+                             "] does not appear to be valid. Please try again.");
+                return;
+             }
+
+             displayModal("Password Reset", "An email has been sent to " + $("#pw-reset-email").val() + ". Please check your email for your password. If you don't see it in your inbox, " +
+                          "please check your junk mail.");
+             $("#pw-reset-email").val("");
+          },
+          error: function(jqXHR, textStatus, errorThrown){
+             alert('addWine error: ' + textStatus +' ' + errorThrown + ' ' + JSON.stringify(jqXHR));
+             $("#pw-reset-modal").modal('hide');
+             displayModal("Password Reset Error", JSON.stringify(jqXHR).responseText);
+
+          }
+      });
+   }
+
+   function register() {
+      var email = $("#txtEmail").val();
+      var password = $("#txtPassword").val();
+      var password2 = $("#txtPassword-2").val();
+      var phone = $("#txtPhone").val();
+      var lastName = $("#txtLastName").val();
+      var firstName = $("#txtFirstName").val();
+
+      if (firstName === "") {
+         displayModal("Registration Error", "First Name can not be empty. Please fill out a First Name");
+         return;
+      }
+      if (lastName === "") {
+         displayModal("Registration Error", "Last Name can not be empty. Please fill out a Last Name");
+         return;
+      }
+      if (phone === "") {
+         displayModal("Registration Error", "Phone can not be empty. Please fill out the Phone text");
+         return;
+      }
+      if (email === "") {
+         displayModal("Registration Error", "Email can not be empty. Please fill out the Email text");
+         return;
+      }
+      if (password === "") {
+         displayModal("Registration Error", "Password can not be empty. Please fill out a Password");
+         return;
+      }
+      if (password2 === "") {
+         displayModal("Registration Error", "Confirm Password can not be empty. Please fill out a Confirm Password");
+         return;
+      }
+      if (password !== password2) {
+         displayModal("Registration Error", "The passwords do not equal. Please fill them out again");
+         return;
+      }
+
+      var request = {
+          "email": email,
+          "password": password,
+          "phone": phone,
+          "lastname": lastName,
+          "firstname": firstName
+      }
+
+      $.ajax({
+          type: 'POST',
+          contentType: 'application/json',
+          url: REGISTRATION_URL,
+          dataType: "json",
+          data: JSON.stringify(request),
+          success: function(data, textStatus, jqXHR){
+             var r = JSON.parse(data);
+             if (r.response.result == "USER EXISTS") {
+                displayModal("Registration Error", "The email address is already registered. If you forgot your password, " +
+                "please click the \"Login\" button and then reset your password.");
+                return;
+             }
+
+             displayModal("Registration", "Registration Successful");
+             showLoginView();
+             $("#txtEmail").val("");
+             $("#txtPassword").val("");
+             $("#txtPassword-2").val("");
+             $("#txtPhone").val("");
+             $("#txtLastName").val("");
+             $("#txtFirstName").val("");
+          },
+          error: function(jqXHR, textStatus, errorThrown){
+             alert('addWine error: ' + textStatus +' ' + errorThrown + ' ' + JSON.stringify(jqXHR));
+          }
+      });
+   }
+   </script>
+   <script type="text/javascript" src="js/constants.js"></script>
+   <style>
+   </style>
+   <section id="services">
+      <div class="container" style="margin-top: -70px;">
+         <div id="loginForm">
+            <h2 class="page-header">Login</h2>
+            <div id="topDiv">
+               <div class="form-group">
+                  <input type="email" name="email" maxlength="75" id="txtLoginEmail" class="form-control" required="required" placeholder="Email Address">
+               </div>
+               <div class="form-group">
+                  <input type="password" name="password" maxlength="15" id="txtLoginPassword" class="form-control" required="required" placeholder="Password">
+               </div>
+               <div class="form-group">
+                  <input type="checkbox" name="remember" id="chkRemember">&nbsp;&nbsp;&nbsp;
+                  Remember Me - So you don't have to log in every time you open the app.
+               </div>
+            </div>
+            <div class="form-group">
+               <p>
+                  <button type="button" id="btnLogin" onclick="login(); return false;" class="btn btn-primary">Login</button>
+                  &nbsp;&nbsp;&nbsp;
+                  <button type="button" id="btn-reset-password" onclick="showResetPasswordModal();" class="btn btn-primary">Reset Password</button>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <button type="button" id="btnLogin-Register" onclick="showRegistrationView();" class="btn btn-primary">Register Now</button>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <button type="button" id="btnLogout" onclick="logout(); return false;" class="btn btn-danger" style="display: none;">Logout</button>
+               </p>
+            </div>
+            <div class="form-group">
+               <span>Why should you register? Here are some benefits:
+                  <ol>
+                     <li>Your information will be pre-populated on checkout.</li>
+                     <li>You can be notified of promotions, coupons and special only our online subscribers will have access to</li>
+                     <li>Your order history will be saved so you can have easy access to re-order the items you love most.</li>
+                  </ol>
+               </span>
+            </div>
+         </div>
+         <div id="registrationForm" style="display: none;">
+            <h2 class="page-header">Register</h2>
+            <div class="form-group">
+               <input type="text" name="txtFirstName" maxlength="75" id="txtFirstName" class="form-control" required="required" placeholder="First Name">
+            </div>
+            <div class="form-group">
+               <input type="text" name="txtLastName" id="txtLastName" maxlength="75" class="form-control" required="required" placeholder="Last Name">
+            </div>
+            <div class="form-group">
+               <input type="text" name="phone" class="form-control"  maxlength="10" id="txtPhone" required="required" placeholder="Phone Number ie. 1234567890">
+            </div>
+            <div class="form-group">
+               <input type="email" name="email" class="form-control" maxlength="75" id="txtEmail" required="required" placeholder="Email Id">
+            </div>
+            <div class="form-group">
+               <input type="password" name="password-1" id="txtPassword" maxlength="15" class="form-control" required="required" placeholder="Password">
+            </div>
+            <div class="form-group">
+               <input type="password" name="password-2" id="txtPassword-2" maxlength="15" class="form-control" required="required" placeholder="Confirm Password">
+            </div>
+            <div class="form-group">
+               <button type="button"  id="btnRegister-Register" onclick="register();" class="btn btn-primary">Register</button>&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;Wait! I'm already a member&nbsp;&nbsp;<button type="button" id="btnRegister-Login" onclick="showLoginView();" class="btn btn-primary">Login</button>
+            </div>
+         </div>
+      </div>
+      <div id="modal" class="modal fade">
+         <div class="modal-dialog">
+           <div class="modal-content">
+             <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+               <h4 class="modal-title" id="modal-title"></h4>
+             </div>
+             <div class="modal-body">
+               <p id="modal-body"></p>
+               <input type="hidden" id="modalItemId" value="">
+             </div>
+             <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal" id="modal-button">OK</button>
+             </div>
+           </div>
+         </div>
+       </div>
+       <div id="pw-reset-modal" class="modal fade">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modal-title">Password Reset</h4>
+              </div>
+              <div class="modal-body">
+                <p id="modal-body">Please enter your email address. A new password will be sent there.</p>
+                <div class="form-group">
+                  <input type="email" id="pw-reset-email" class="form-control" maxlength="75" required="required" placeholder="my-address@example.com">
+               </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-lrg btn-primary" onclick="resetPassword();">Reset Password</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-lrg btn-danger" data-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+   </section>
+   <!--/#footer-->
+
+   <script type="text/javascript" src="js/jquery.js"></script>
+   <script type="text/javascript" src="js/persist-min.js"></script>
+   <script type="text/javascript" src="js/bootstrap.min.js"></script>
+   <script type="text/javascript" src="js/lightbox.min.js"></script>
+   <script type="text/javascript" src="js/wow.min.js"></script>
+   <script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/lightbox.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
+	<link href="css/responsive.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+	    <script src="js/html5shiv.js"></script>
+	    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+
+<body>
+   <script type="text/javascript" src="cordova.js"></script>
+   <script type="text/javascript" src="js/index.js"></script>
+   <script type="text/javascript">
+       app.initialize();
+   </script>
+   <style>
+   .container {
+     margin-top: -20px;
+   }
+   </style>
+	<header id="header">
+        <div class="navbar navbar-inverse" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a href="view_cart.html" style="margin-top: 15px;" class="btn btn-sm btn-default">
+                       <i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;&nbsp;
+                       <span id="cartTotal">$0.00 (0 items)</span>
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="home.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="view_cart.html">View Cart</a></li>
+                        <li><a href="login.html">Login/Logout</a></li>
+                        <li><a href="previous_order.html">Previous Orders</a></li>
+                        <li><a href="user_info.html">Settings</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--/#header-->
+    <script type="application/x-javascript">
+    var page = "home";
+    </script>
+    <script type="text/javascript" src="js/constants.js"></script>
+    <script src="js/menu.js"> </script>
+    <style>
+    .modal-body {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+    </style>
+    <section id="services">
+        <div class="container" style="margin-top: -70px;" >
+           <!-- <div class="modal fade" id="restaurant-list-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+              <div class="modal-dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
+                 <div class="modal-content">
+                    <div class="modal-header">
+                         <h3 class="modal-title">Choose A Restaurant</h3>
+                    </div>
+                    <div class="modal-body">
+                       <table id="restaurant-list">
+                          <tr>
+                             <td>
+                                ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF
+                               ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF
+                               ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF
+                               ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF
+                               ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF
+                               ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF
+                               ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF
+                               ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF
+                               ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF
+                               ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF
+                               ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF
+                               ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDFASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF
+                              ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF
+                              ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF
+                              ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF
+                              ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF
+                              ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF
+                              ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF
+                              ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF
+                              ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF
+                              ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF
+                              ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF
+                              ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF ASFASDFASDFASDF
+                             </td>
+                          </tr>
+                       </table>
+                    </div>
+                    <div class="modal-footer">&nbsp;</div>
+                 </div>
+              </div>
+           </div> -->
+           <div id="restaurant-list-modal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Choose Restaurant Location</h4>
+                        </div>
+                        <div class="modal-body" id="restaurant-modal-body">
+                        </div>
+                    </div>
+                </div>
+            </div>
+           <script>
+           function callStore() {
+              var phoneNumber = getJsonFromSession(RESTAURANT_SESSION_KEY).phone;
+              window.open('tel:' + phoneNumber, '_system');
+           }
+
+           function showRestaurantList() {
+               var restaurant = getJsonFromSession(RESTAURANT_SESSION_KEY);
+               if (restaurant != null && restaurant != "") {
+                  loadInfo();
+                  return;
+               }
+               var restaurantList = getJsonFromSession(RESTAURANT_LIST_SESSION_KEY);
+               if (restaurantList.length > 0) {
+                  displayRestaurantModal();
+                  return;
+               }
+               if (restaurantList.length == 1) {
+                  addJsonToSession(RESTAURANT_SESSION_KEY, restaurantList[0]);
+               }
+
+               loadInfo();
+           }
+
+           function loadInfo() {
+              var restaurant = getJsonFromSession(RESTAURANT_SESSION_KEY);
+              $("#phone-number").text(restaurant.phone);
+              $("#address").text(restaurant.address);
+              $("#city").text(restaurant.city);
+              $("#state").text(restaurant.state);
+              $("#zip").text(restaurant.zip);
+              $("#store-location").text(restaurant.city + ", " + restaurant.state);
+
+              var day = new Date().getDay(); // Sunday is 0, Monday 1 .... Saturday 6
+              var openTime = "", closeTime = "";
+              if (day == 0) {
+                 openTime = restaurant.hours.sundayOpenTime;
+                 closeTime = restaurant.hours.sundayCloseTime;
+              } else if (day == 1) {
+                 openTime = restaurant.hours.mondayOpenTime;
+                 closeTime = restaurant.hours.mondayCloseTime;
+              } else if (day == 2) {
+                 openTime = restaurant.hours.tuesdayOpenTime;
+                 closeTime = restaurant.hours.tuesdayCloseTime;
+              } else if (day == 3) {
+                 openTime = restaurant.hours.wednesdayOpenTime;
+                 closeTime = restaurant.hours.wednesdayCloseTime;
+              } else if (day == 4) {
+                 openTime = restaurant.hours.thursdayOpenTime;
+                 closeTime = restaurant.hours.thursdayCloseTime;
+              } else if (day == 5) {
+                 openTime = restaurant.hours.fridayOpenTime;
+                 closeTime = restaurant.hours.fridayCloseTime;
+              } else if (day == 6) {
+                 openTime = restaurant.hours.saturdayOpenTime;
+                 closeTime = restaurant.hours.saturdayCloseTime;
+              }
+
+              var closings = restaurant.closings;
+              var currentDate = new Date();
+              	for (var i = 0; i < closings.length; i++) {
+              		var closingDate = closings[i].closingDate;
+              		closingDate = new Date(Date.parse(closingDate.replace('-','/','g')));
+
+              		if ( (closingDate.getYear() == currentDate.getYear()) &&
+              		     (closingDate.getMonth() == currentDate.getMonth()) &&
+              	        (closingDate.getDay() == currentDate.getDay()) )
+              		{
+              			openTime = closings[i].openTime;
+              			closeTime = closings[i].closeTime;
+                     $("#modal-message").text(closings[i].reason);
+           				$("#modal").modal({
+           		         visibility: 'show',
+           		         backdrop: 'static',
+           		         keyboard: false});
+              		}
+              	}
+
+              $("#time-open").text(openTime);
+              $("#time-close").text(closeTime);
+
+              var status = "<font color=\"green\">Open</font>";
+              if ( !isStoreOpen() ) {
+                 status = "<font color=\"red\">Closed</font>";
+              }
+              $("#store-status").html(status);
+           }
+           </script>
+           <p>&nbsp;</p>
+           <!-- <div class="col-sm-12"><img class="img-responsive img-rounded img-thumbnail" src="images/hamburger.jpg"></div> -->
+           <div class="col-sm-12" style="text-align: center;"><img class="img-responsive img-rounded img-thumbnail" src="images/burger.jpg"></div>
+           <div class="row home-margin" >
+              <div class="col-xs-6">
+                   <p><b>
+                      Today's Hours:<br><span id="time-open"></span>am-<span id="time-close"></span>pm<br>
+                      The Store is <b><span id="store-status"></span><b>
+                   </b></p>
+                   <!-- <p>Status: <span style="font-weight: bold;" id="store-status"></span></p> -->
+                   <!-- <p><span style="color: red;">** Excludes Holidays and other reasons the store may
+                   be closed <br>ie. Natural Disasters</span></p> -->
+             </div>
+             <div class="col-xs-6">
+                   <p>Location:<br>
+                      <span id="address"></span><br>
+                      <span id="city"></span>, <span id="state"></span> <span id="zip"></span>
+                   </p>
+             </div>
+             <div class="col-xs-12" style="text-align: center">
+                <p><a href="" class="btn btn-success" onclick="callStore(); return false;">
+                   <i class="fa fa-phone"></i>&nbsp;&nbsp;<span id="phone-number"><span>
+                </a></p>
+             </div>
+          </div>
+          <div class="col-sm-6">
+             <a href="menu.html" class="promo-code-btn btn btn-lg btn-primary"><i class="fa fa-lock"></i>&nbsp;&nbsp;Order Online</a>
+          </div>
+          <div class="col-sm-6">
+             <a href="previous_order.html" class="promo-code-btn btn btn-lg btn-primary">Previous Orders</a>
+          </div>
+          <div class="col-sm-12">
+             <label class="promo-code-btn btn btn-lg btn-primary" onclick="displayRestaurantModal();">Change Restaurant</label>
+          </div>
+
+          <div id="modal" class="modal fade">
+             <div class="modal-dialog">
+               <div class="modal-content">
+                 <div class="modal-header">
+                   <h4 class="modal-title">Restaurant Closed</h4>
+                 </div>
+                 <div class="modal-body">
+                   <p>
+                     <div style="text-align: center;">
+                        <span id="modal-message"></span>
+                     </div>
+                   </p>
+                 </div>
+                 <div class="modal-footer"><button type="button" class="btn btn-primary" data-dismiss="modal">OK</button></div>
+               </div>
+             </div>
+           </div>
+       </div>
+    </section>
+    <!--/#footer-->
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/persist-min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/lightbox.min.js"></script>
+    <script type="text/javascript" src="js/wow.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>

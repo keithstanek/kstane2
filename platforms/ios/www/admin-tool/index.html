@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="format-detection" content="telephone=no" />
+   <meta name="msapplication-tap-highlight" content="no" />
+   <meta name="description" content="">
+   <meta name="author" content="">
+   <title>Real Time Ordering System - Order Status Page</title>
+</head>
+<body>
+   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="css/index.css">
+   <link rel="stylesheet" href="css/font-awesome.min.css">
+   <link href="css/animate.min.css" rel="stylesheet">
+   <link href="css/lightbox.css" rel="stylesheet">
+   <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+
+   <script src="//js.pusher.com/3.0/pusher.min.js"></script>
+   <script type="text/javascript" src="js/jquery.js"></script>
+   <script type="text/javascript" src="js/index.js"></script>
+   <script type="text/javascript" src="js/main.js"></script>
+   <script type="text/javascript" src="js/audio-min.js"></script>
+   <script type="text/javascript" src="js/bootstrap.min.js"></script>
+   <script type="text/javascript" src="cordova.js"></script>
+
+   <script type="text/javascript">
+   app.initialize();
+   </script>
+   <style>
+   body { font-size: 2em; }
+   </style>
+
+   <div id="newAlerts">
+      <div id="modal" class="modal fade">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h4 class="modal-title" id="modal-title">Restaurant Real Time Ordering Login</h4>
+               </div>
+               <div class="modal-body">
+                  <p id="modal-body">
+                     <div id="topDiv">
+                        <span style="color: red"><div id="errors"></div></span>
+                        <div class="form-group">
+                           <input type="email" name="email" maxlength="75" id="txtLoginEmail" class="form-control" required="required" placeholder="User Name">
+                        </div>
+                        <div class="form-group">
+                           <input type="password" name="password" maxlength="15" id="txtLoginPassword" class="form-control" required="required" placeholder="Password">
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <p><button type="button" id="btnLogin" onclick="login(); return false;" class="btn btn-primary"><i class="fa fa-lock"></i>&nbsp;&nbsp;&nbsp;Login</button></p>
+                     </div>
+                  </p>
+               </div>
+               <div class="modal-footer">
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="table">
+         <div style="display: table-row">
+            <div class="big-cell" id="order-buttons">
+               <!-- <div class="table">
+                  <div id="tableHeading" class="tableRow tableHeading bg-primary">
+                     <div class="cell cell-left">ID</div>
+                     <div class="cell">Order</div>
+                     <div class="cell cell-right">Status</div>
+                  </div>
+               </div> -->
+            </div>
+
+            <div class="big-cell">
+               <div style="margin: 15px; background-color: white; border: 1px solid gray;">
+
+                  <table style="width: 100%;">
+                     <tr>
+                        <td colspan="2" style="text-align: center;">
+                           <h3>Order #<span id="orderDetailHeader-number"></span> Detail</h3>
+                           <h4><span id="order-date"></span></h4>
+                        </td>
+                     </tr>
+                     <tr class="order-table-header">
+                        <td colspan="2"><b>Customer Details</b></tr>
+                     </tr>
+                     <tr>
+                        <td class="order-summary-left-cell">Name:</td>
+                        <td><span id="customer-name"></span></td>
+                     </tr>
+                     <tr>
+                        <td class="order-summary-left-cell">Phone:</td>
+                        <td><span id="customer-phone"></span></td>
+                     </tr>
+                     <tr>
+                        <td class="order-summary-left-cell">Email:</td>
+                        <td><span id="customer-email"></span></td>
+                     </tr>
+                     <tr class="order-table-header">
+                        <td colspan="2"><b>Order Summary</b></tr>
+                     </tr>
+                     <tr>
+                        <td colspan="2"><span id="order-summary"></span></td>
+                     </tr>
+                     <tr class="order-table-header">
+                        <td colspan="2"><b>Order Totals</b></tr>
+                     </tr>
+                     <tr>
+                        <td class="order-summary-left-cell">Sub Total:</td>
+                        <td>$<span id="sub-total">0.00</span></td>
+                     </tr>
+                     <tr>
+                        <td class="order-summary-left-cell">Tax Total:</td>
+                        <td>$<span id="tax-total">0.00</span></td>
+                     </tr>
+                     <tr>
+                        <td class="order-summary-left-cell" width="75">Discount:</td>
+                        <td>$<span id="discount">0.00</span></td>
+                     </tr>
+                     <tr>
+                        <td class="order-summary-left-cell">Total:</td>
+                        <td>$<span id="total">0.00</span></td>
+                     </tr>
+                     <tr class="order-table-header"><td colspan="2"><div style="text-align: center;">Update Status To</div>   </td></tr>
+                     <tr><td colspan="2"><div style="text-align: center"><span id="order-detail-update-status-btn"></span></div></td></tr>
+                  </table>
+               </div>
+            </div>
+
+         </div>
+      </div>
+   </body>
+   </html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/lightbox.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
+	<link href="css/responsive.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+	    <script src="js/html5shiv.js"></script>
+	    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+
+<body>
+   <script type="text/javascript" src="cordova.js"></script>
+   <script type="text/javascript" src="js/index.js"></script>
+   <script type="text/javascript">
+       app.initialize();
+   </script>
+   <style>
+   .container {
+     margin-top: -20px;
+   }
+   </style>
+	<header id="header">
+        <div class="navbar navbar-inverse" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a href="view_cart.html" style="margin-top: 15px;" class="btn btn-sm btn-default">
+                       <i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;&nbsp;
+                       <span id="cartTotal">$0.00 (0 items)</span>
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="view_cart.html">View Cart</a></li>
+                        <li><a href="login.html">Login/Logout</a></li>
+                        <li><a href="previous_order.html">Previous Orders</a></li>
+                        <li><a href="user_info.html">Settings</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--/#header-->
+    <script type="application/x-javascript">
+    var page = "checkout";
+    </script>
+    <script type="text/javascript" src="js/constants.js"></script>
+    <script src="js/menu.js"> </script>
+    <style>
+
+    </style>
+    <section id="services">
+      <div class="container" style="margin-top: -70px;">
+         <h2 class="page-header">Checkout</h2>
+         <div class="row">
+             <div class="col-sm-12">
+                 <div id="order-summary" class="testimonial bottom">
+                     <div class="category-underline"><h3><span class="category-header">Order Summary</span></h3></div>
+                 </div>
+                 <p></p>
+                 <p>
+                    <!-- <input type="checkbox" id="chkConfirm" checked="false" value="1"> -->
+                    Please review your order for accuracy. Click the buttons below to modify your order.<br>
+                    <a href="view_cart.html" class="btn btn-success">Modify Cart</a>&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;<a href="menu.html" class="btn btn-success">Add More Items</a>
+                 </p>
+             </div>
+             <!-- <div class="col-sm-12" style="box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);"> -->
+             <div class="col-sm-12">
+                 <div class="testimonial bottom">
+                    <div class="category-underline">
+                     <h3><span class="category-header">Payment Info</span></h3></div>
+                     <p>
+                        <p>
+                           <table>
+                              <tr>
+                                 <td class="cell-one">Sub-Total:&nbsp;</td>
+                                 <td class="cell-two">$<span id="summary-sub-total">0.00</span></td>
+                                 <td class="cell-one">Discount:&nbsp;</td>
+                                 <td class="cell-two">$<span id="summary-discount">0.00</span></td>
+                              </tr>
+                              <tr>
+                                 <td class="cell-one">Tax Due:&nbsp;</td>
+                                 <td class="cell-two">$<span id="summary-tax">0.00</span></td>
+                                 <td class="cell-one"><span id="delivery-payment-info">Delivery:&nbsp;</span></td>
+                                 <td class="cell-two"><span id="delivery-payment-amount">$<span id="summary-delivery-fee">0.00</span></span></td>
+                              </tr>
+                              <tr>
+                                 <td class="cell-one"><b>Amount Due:&nbsp;</b></td>
+                                 <td class="cell-two"><b>$<span id="summary-total">0.00</span></b></td>
+                                 <td>&nbsp;</td>
+                                 <td>&nbsp;</td>
+                              </tr>
+                           </table>
+                        </p>
+                        <form>
+                        <table>
+                           <tr>
+                              <td><input type="radio" name="paymentType" onclick="toggleCCDiv();" checked id="rdoPayAtStore" value="pay-at-store">&nbsp;&nbsp;</td>
+                              <td>Pay at pick-up time - <span style="color: red">** NOTE: You can pay with your credit/debit/gift card at the store.</span></td>
+                           </tr>
+                           <tr>
+                              <td><input type="radio" name="paymentType" onclick="toggleCCDiv();" id="rdoCCPayment" value="credit-card">&nbsp;&nbsp;</td>
+                              <td valign="top">Credit Card</td>
+                           </tr>
+                        </table>
+                        <div id="ccpaymentinfo" style="display: none; margin-left: 19px;">
+                           <div class="form-group">
+                              Card Number:<br>
+                              <input type="text" id="credit-card-number" onkeyup="replaceText($(this));" onblur="replaceText($(this));" placeholder="1234123412341234" size="40"  maxlength="16" value="">
+                           </div>
+                           <div class="form-group">
+                              Expiration Date:<br>
+                              <select id="ccExpireMonth">
+                                 <option value="">month</option>
+                                 <option value="01">01</option>
+                                 <option value="02">02</option>
+                                 <option value="03">03</option>
+                                 <option value="04">04</option>
+                                 <option value="05">05</option>
+                                 <option value="06">06</option>
+                                 <option value="07">07</option>
+                                 <option value="08">08</option>
+                                 <option value="09">09</option>
+                                 <option value="10">10</option>
+                                 <option value="11">11</option>
+                                 <option value="12">12</option>
+                              </select>&nbsp:&nbsp;
+                              <select id="ccExpireYear">
+                                 <option value="">year</option>
+                                 <option value="2016">2016</option>
+                                 <option value="2017">2017</option>
+                                 <option value="2018">2018</option>
+                                 <option value="2019">2019</option>
+                                 <option value="2020">2020</option>
+                              </select>
+                           </div>
+                           <div class="form-group">
+                              Security Code:<br>
+                              <input type="text" id="ccSecurityCode" onkeyup="replaceText($(this));" onblur="replaceText($(this));" placeholder="123" size="10" maxlength="5" value="">
+                           </div>
+                           <div class="form-group">
+                              Zip Code:<br>
+                              <input type="text" id="ccZipCode" onkeyup="replaceText($(this));" onblur="replaceText($(this));" placeholder="123" size="10" maxlength="5" value="">
+                           </div>
+                        </div>
+                        </form>
+                     </p>
+                  </div>
+             </div>
+             <div class="col-sm-12"  id="delivery-info">
+                 <div class="contact-form bottom">
+                     <div class="category-underline"><h3><span class="category-header">Contact Information</span></h3></div>
+                     <form>
+                        <br>
+                        <div class="form-group" style="font-weight: bold;">
+                           Order Type: &nbsp;<span id="txtOrderType"></span><br>
+                           <input type="button" onclick="loadCheckoutModal(); return false;" value="Change Order Type" class="btn btn-success" />
+                        </div>
+                        <div class="form-group">
+                           <input type="text" id="name" placeholder="Name for Pick-up" size="40" value="">
+                        </div>
+                        <div class="form-group" id="div-delivery-address"  style="display: none;">
+                           <input type="text" id="delivery-address" placeholder="Delivery Address - Russelville Only" size="40" value="">
+                        </div>
+                        <div class="form-group">
+                           <input type="text" id="email" placeholder="Email" size="40" value="">
+                        </div>
+                        <div class="form-group">
+                           <input type="text" id="phone" onkeyup="replaceText($(this));" onblur="replaceText($(this));" placeholder="Phone Number" size="40" value="">
+                        </div>
+                     </form>
+                 </div>
+             </div>
+             <div class="col-sm-12" id="saveOrder">
+                <p>
+                   Will this be a common order? Save time ordering your common orders by giving this order a name.<br>
+                   <input type="input" placeholder="Order Name" maxlength="25" id="txtSaveOrder"><br>
+                   <span style="color: red">
+                      ** Note: If you already have an order saved with that name, the previous order will be replaced with this order.
+                   </span>
+                </p>
+             </div>
+             <div class="col-sm-12">
+                 <div class="text-center">
+                     <p class="">
+                        <a href="" onclick="submitOrder();return false;" class="promo-code-btn btn btn-lg btn-primary"><i class="fa fa-lock"></i>&nbsp;&nbsp;&nbsp;Place Secure Order</a>
+                        <a href="home.html" class="promo-code-btn btn-lg btn-danger">Cancel</a>
+                     </p>
+                 </div>
+             </div>
+             <div id="modal-1" class="modal fade">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Choose Order Type</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>
+                        <div style="text-align: center;">
+                           <h3><span style="font-weight: bold;">Do you want to:</span></h3>
+                           <input type="button" value="Dine In" class="btn btn-primary" onclick="stepTwo('Dine In')">
+                           <input type="button" value="Pick Up" class="btn btn-primary" onclick="stepTwo('Pick Up')">
+                           <input type="button" id="btnDelivery" value="Delivery" class="btn btn-primary" onclick="stepTwo('Delivery')"><br>
+                        </div>
+                        <p></p>
+                        <p>
+                           <span id="delivery-text" style="color: red; font-weight: bold;">
+                              ** There is an additional charge for delivery<br>
+                              ** Delivery service is only available in Russellville city limits.
+                           </span>
+                        </p>
+                      </p>
+                    </div>
+                    <div class="modal-footer"></div>
+                  </div>
+                </div>
+              </div>
+              <div id="checkoutModal" class="modal fade">
+                 <div class="modal-dialog">
+                   <div class="modal-content">
+                     <div class="modal-header">
+                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                       <h4 class="modal-title">Checkout</h4>
+                     </div>
+                     <div class="modal-body">
+                       <p id="modal-message"></p>
+                     </div>
+                     <div class="modal-footer">
+                       <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                     </div>
+                   </div><!-- /.modal-content -->
+                 </div><!-- /.modal-dialog -->
+               </div><!-- /.modal -->
+         </div>
+      </div>
+    </section>
+    <!--/#footer-->
+
+    <script type="text/javascript">
+    var showCheckoutModal = true;
+    var loadMenu = false;
+    var loadCart = false;
+
+    function toggleCCDiv() {
+      if ($("#rdoCCPayment").is(":checked")) {
+         $("#ccpaymentinfo").show();
+      } else {
+         $("#ccpaymentinfo").hide();
+      }
+   }
+
+   function displayModal(text) {
+      $("#modal-message").text(text);
+      $("#checkoutModal").modal('show');
+   }
+
+   function checkValue(field, fieldName) {
+      if (field == null || field == "") {
+         errorFields[errorFieldsCounter++] = fieldName;
+      }
+   }
+
+   var errorFields = [];
+   var errorFieldsCounter = 0;
+
+   function replaceText(e) {
+     e.val(e.val().replace(/[^0-9]/g, ""));
+   }
+
+   function fillInForm() {
+      var user = getJsonFromSession(USER_SESSION_KEY);
+      $("#email").val(user.email);
+      $("#name").val(user.firstName + " " + user.lastName);
+      $("#phone").val(user.phone);
+   }
+
+   function submitOrder() {
+      var storeIsOpen = isStoreOpen();
+      // if (!storeIsOpen) {
+      //    displayModal("The restuarant is closed. It will open at " + getJsonFromSession(RESTAURANT_SESSION_KEY).timeOpen + " AM. You can re-sumbit your order then.")
+      //    return;
+      // }
+
+      // reset the counter and array
+      errorFieldsCounter = 0;
+      errorFields = []
+
+      var email = $("#email").val();
+      var name = $("#name").val();
+      var phone = $("#phone").val();
+      var deliveryAddress = $("#delivery-address").val();
+      var ccNumber = $("#credit-card-number").val();
+      var ccExpireMonth = $("#ccExpireMonth").val();
+      var ccExpireYear = $("#ccExpireYear").val();
+      var ccSecurityCode = $("#ccSecurityCode").val();
+      var ccZipCode = $("#ccZipCode").val();
+
+      checkValue(name, "Name");
+      checkValue(email, "Email Address");
+      checkValue(phone, "Phone Number");
+
+      if ($("#txtOrderType").text() === "Delivery") {
+         checkValue(deliveryAddress, "Delivery Address");
+      }
+
+      if ( $("#rdoCCPayment").is(':checked') ) {
+         checkValue(ccNumber, "Credit Card Number");
+         checkValue(ccExpireMonth, "Credit Card Expiration Month");
+         checkValue(ccExpireYear, "Credit Card Expiration Year");
+         checkValue(ccSecurityCode, "Credit Card Security Code");
+         checkValue(ccZipCode, "Credit Card Zip Code");
+      }
+
+      if (errorFields.length > 0) {
+         // build string to display in the modal
+         var displayString = "<span style=\"color: red\">The following fields need to be filled out<ul>";
+         for (var i = 0; i < errorFields.length; i++) {
+            displayString += "<li>" + errorFields[i] + "</li>";
+         }
+         displayString += "</ul></span>";
+         $("#modal-message").html(displayString);
+         $("#checkoutModal").modal('show');
+
+         return;
+      }
+      var paymentType = $('input:radio[name=paymentType]:checked').val();
+      var cart = getJsonFromSession(CART_SESSION_KEY);
+      cart.items = $.grep(cart.items,function(n){ return(n) });
+      addJsonToSession(CART_SESSION_KEY, cart);
+      var request = {
+          "email": email,
+          "phone": phone,
+          "name": name,
+          "deliveryAddress": deliveryAddress,
+          "ccSecurityCode": ccSecurityCode,
+          "ccExpireMonth": ccExpireMonth,
+          "ccExpireYear": ccExpireYear,
+          "ccZipCode": ccZipCode,
+          "ccNumber": ccNumber,
+          "restaurantId": getRestaurantIdFromSession(),
+          "deliveryAmount": $("#summary-delivery-fee").text(),
+          "discountType": getVarFromSession(PROMO_DISCOUNT_TYPE_SESSION_KEY),
+          "discountTotal": $("#summary-discount").text(),
+          "userId": getUserIdFromSession(),
+          "paymentType": paymentType,
+          "orderStatus": "ORDER_CREATED",
+          "promoCode": getVarFromSession(PROMO_DISCOUNT_NAME_SESSION_KEY),
+          "orderType": $("#txtOrderType").text(),
+          "total": $("#summary-total").text(),
+          "taxTotal": $("#summary-tax").text(),
+          "cart": getJsonFromSession(CART_SESSION_KEY),
+          "subTotal": $("#summary-sub-total").text()
+      }
+
+      $.ajax({
+          type: 'POST',
+          contentType: 'application/json',
+          url: SUBMIT_ORDER_URL,
+          dataType: "json",
+          data: JSON.stringify(request),
+          success: function(data, textStatus, jqXHR){
+             var r = JSON.parse(data);
+
+             if (r.response.error != undefined) {
+                $("#modal-message").html(r.response.error);
+                $("#checkoutModal").modal('show');
+                return;
+             }
+             addVarToSession(ORDER_CONFIRMATION_NO_SESSION_KEY, r.response.orderId);
+             addVarToSession(ORDER_CONFIRMATION_NAME_SESSION_KEY, name);
+
+             // save the order to history if they wanted
+             var saveOrder = $("#txtSaveOrder").val().trim();
+             if (saveOrder !== "") {
+                addCartToOrderHistory(saveOrder);
+             }
+
+             window.location.href="order_confirmation.html";
+          },
+          error: function(jqXHR, textStatus, errorThrown){
+             alert('error: ' + textStatus +' ' + errorThrown + ' ' + JSON.stringify(jqXHR));
+          }
+      });
+
+      return;
+   }
+
+   function loadCheckoutModal() {
+      var restaurant = getJsonFromSession(RESTAURANT_SESSION_KEY);
+      //alert(restaurant.deliveryFee)
+      if (restaurant.deliveryFee == "0") {
+         $("#btnDelivery").hide();
+         $("#delivery-text").hide();
+         $("#delivery-payment-info").hide();
+         $("#delivery-payment-amount").hide();
+      }
+      $("#div-delivery-address").hide();
+      $("#modal-1").modal({
+         visibility: 'show',
+         backdrop: 'static',
+         keyboard: false});
+
+   }
+
+   function stepTwo(val) {
+      $("#modal-1").modal('hide');
+      orderType = val;
+      if (orderType === "Delivery") {
+         $("#div-delivery-address").toggle();
+      }
+      $("#txtOrderType").text(orderType);
+      calculateCheckoutTotals();
+   }
+
+   function loadCartSummary() {
+      var cart = JSON.parse(window.sessionStorage.getItem("cart"));
+   	var itemList = getItemList();
+      for (var i =0; i < cart.items.length; i++) {
+   		if (cart.items[i] === null) {
+   			continue;
+   		}
+   		var item =  JSON.parse(itemList[cart.items[i].id]);
+
+         var div = "<div><div class=\"item-cell\">[" + cart.items[i].quantity + "]&nbsp;&nbsp;</div>" +
+               "<div class=\"item-cell\">" + item.name + buildCondimentList(cart.items[i]) + "</div></div>";
+     		$("#order-summary").append(div).trigger("create");
+   	}
+      calculateCheckoutTotals();
+   }
+
+   function calculateCheckoutTotals() {
+      var cart = getJsonFromSession(CART_SESSION_KEY);
+   	var itemList = getItemList();
+      var subTotal = 0;
+      for (var i =0; i < cart.items.length; i++) {
+   		if (cart.items[i] === null) {
+   			continue;
+   		}
+   		var item =  JSON.parse(itemList[cart.items[i].id]);
+         subTotal += (cart.items[i].quantity * cart.items[i].price);
+   	}
+
+      var promoDiscount = getVarFromSession(PROMO_DISCOUNT_SESSION_KEY);
+      var discountText = "";
+      if (promoDiscount !== null && promoDiscount !== "") {
+         $("#summary-discount").text(formatNumber(Number(promoDiscount)));
+      } else {
+         $("#summary-discount").text("0.00");
+      }
+
+      var orderType = $("#txtOrderType").text();
+      var deliveryFee = 3;
+      if (orderType == "Delivery") {
+         var restaurant = getJsonFromSession(RESTAURANT_SESSION_KEY);
+         if (restaurant.deliveryFee !== null && restaurant.deliveryFee !== "" && restaurant.deliveryFee !== undefined){
+            deliveryFee = Number(restaurant.deliveryFee);
+         }
+         $("#summary-delivery-fee").text(formatNumber(deliveryFee));
+      } else {
+         deliveryFee = 0;
+         $("#summary-delivery-fee").text("0.00");
+      }
+
+      var tax = Number(getJsonFromSession(RESTAURANT_SESSION_KEY).taxRate) * (Number(subTotal) - Number(promoDiscount));
+
+      $("#summary-tax").text(formatNumber(tax));
+      var total = (subTotal - Number(promoDiscount)) + deliveryFee + tax;
+      $("#summary-total").text(formatNumber(total));
+      $("#summary-sub-total").text(formatNumber(subTotal));
+   }
+
+    </script>
+    <div id="restaurant-list-modal" class="modal fade">
+         <div class="modal-dialog">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <h4 class="modal-title">Choose Restaurant Location</h4>
+                 </div>
+                 <div class="modal-body" id="restaurant-modal-body">
+                 </div>
+             </div>
+         </div>
+     </div>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/persist-min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/lightbox.min.js"></script>
+    <script type="text/javascript" src="js/wow.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
